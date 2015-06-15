@@ -13,6 +13,7 @@ namespace Problem82K
             int maxBase = 6;
 
             // Maximum number of digits (in base 3).
+            // (adjust to fit within your system's memory size)
             int maxNumbers = 20000;
             int maxDigits = 100000;
 
@@ -34,10 +35,10 @@ namespace Problem82K
             int currentMaxBit = 0;
 
 
-
-            currentMaxBit = 9000;
+            // initialize it to a nonzero value (to skip the trivial cases of 0 and 1)
+            // (set this to a higher value to start testing at a future stage)
+            currentMaxBit = 2;
             currentNumberMap[currentMaxBit] = 1;
-
 
 
             BigInteger currentNumber = 0;
@@ -83,7 +84,6 @@ namespace Problem82K
                                 tempNumber -= powerOf[b][logBaseB];
                                 if (tempNumber >= powerOf[b][logBaseB])
                                 {
-
                                     getNextNumber(b, maxBase, tempNumberMap, maxLog, logBaseB, powerOf, currentNumberMap, ref currentMaxBit);
                                     doAdd = false;
 
@@ -129,7 +129,6 @@ namespace Problem82K
             }
         }
 
-
         private static void addOne(byte[] numberMap, ref int maxBit, int startBit)
         {
             for (int i = startBit; i < numberMap.Length - 1; i++)
@@ -151,7 +150,6 @@ namespace Problem82K
             }
         }
 
-
         private static int logCeil(BigInteger number, int logBase)
         {
             int log = 0;
@@ -163,9 +161,6 @@ namespace Problem82K
             }
             return log;
         }
-
-
-
 
         private static void getNextNumber(int currentBase, int desiredBase, byte[] tempNumberMap, int maxLog, int minLog, BigInteger[][] powerOf, byte[] currentNumberMap, ref int currentMaxBit)
         {
@@ -180,8 +175,6 @@ namespace Problem82K
                     tempNumber += powerOf[currentBase][i];
                 }
             }
-
-
 
             int logBaseB = logCeil(tempNumber, desiredBase);
             int newMaxLog = logBaseB;
@@ -225,7 +218,6 @@ namespace Problem82K
             currentMaxBit = newMaxLog;
 
         }
-
 
     }
 }
